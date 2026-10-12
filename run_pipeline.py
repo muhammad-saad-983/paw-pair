@@ -7,6 +7,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -18,10 +19,23 @@ from pawpair.apriori import apriori, read_baskets, export_itemsets
 from pawpair.rules import generate_rules, export_rules
 
 
+def unit_interval(value: str) -> float:
+    """Reject invalid thresholds during argument parsing, before writing data."""
+    try:
+        number = float(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("threshold must be a number") from exc
+    if not math.isfinite(number) or not 0 < number <= 1:
+        raise argparse.ArgumentTypeError(
+            "threshold must be finite and greater than 0 and at most 1"
+        )
+    return number
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="PawPair data -> Apriori -> rules")
-    parser.add_argument("--min-support", type=float, default=.002)
-    parser.add_argument("--min-confidence", type=float, default=.30)
+    parser.add_argument("--min-support", type=unit_interval, default=.002)
+    parser.add_argument("--min-confidence", type=unit_interval, default=.30)
     parser.add_argument("--include-prior", action="store_true")
     args = parser.parse_args()
     raw = PROJECT / "data/raw"
