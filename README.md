@@ -12,6 +12,7 @@ The project includes a reproducible data-mining pipeline, command-line recommend
 - **Explainable recommendations:** Recommend products not already in the basket and display the supporting rules.
 - **Smart basket and what-if analysis:** Add or remove items and compare recommendations before and after changes.
 - **Interactive dashboard:** Explore transactions, frequent itemsets, searchable rules, dynamic thresholds, and live recommendations.
+- **Visual analytics:** Explore a directed one-to-one association graph, support/confidence scatterplot, and side-by-side threshold comparisons.
 - **Automated tests:** Verify preprocessing, mining, rule generation, and recommendation behavior.
 
 ## Dataset
@@ -33,16 +34,18 @@ The optional `order_products__prior.csv` can also be used with the `--include-pr
 
 ## Getting Started
 
-**Requirements:** Python 3.10 or later. The mining backend uses the standard library; the dashboard requires Streamlit and pandas.
+**Requirements:** Python 3.10 or later. The mining backend uses the standard library; the dashboard uses Streamlit, pandas, Plotly, and NetworkX.
 
 ```bash
 git clone https://github.com/muhammad-saad-983/paw-pair.git
 cd paw-pair
 ```
 
-Install dashboard dependencies and place the dataset files in `data/raw/`, then generate frequent itemsets and association rules:
+Create an isolated Python environment, install dependencies, and place the dataset files in `data/raw/`:
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
@@ -61,10 +64,10 @@ python run_pipeline.py --min-support 0.003 --min-confidence 0.5
 ### Run the Streamlit dashboard
 
 ```bash
-streamlit run app.py
+python -m streamlit run app.py
 ```
 
-Use the sidebar to adjust minimum support/confidence and navigate **Overview**, **Frequent Itemsets**, **Rules Explorer**, and **Recommendations**. Changing the controls recalculates results in memory without overwriting `data/processed/`.
+Use the sidebar to adjust minimum support/confidence and navigate **Overview**, **Frequent Itemsets**, **Rules Explorer**, **Recommendations**, **Association Graph**, and **Threshold Comparison**. Changing the controls recalculates results in memory without overwriting `data/processed/`.
 
 ### Generate Recommendations
 
@@ -112,7 +115,9 @@ paw-pair/
 │   ├── apriori.py         # Frequent itemset mining
 │   ├── rules.py           # Association rule generation
 │   ├── recommender.py     # Recommendations and basket operations
-│   └── ui_service.py      # Read-only dashboard data and rule filtering
+│   ├── ui_service.py      # Read-only dashboard data and rule filtering
+│   ├── analytics.py       # Association graph filters and A/B comparisons
+│   └── network_plot.py    # Directed association network visualization
 ├── tests/                 # Automated unit tests
 ├── app.py                 # Streamlit dashboard
 ├── run_pipeline.py        # Data-mining entry point
@@ -124,4 +129,4 @@ paw-pair/
 
 Recommendations reflect **observed co-purchases**, not product compatibility, causal relationships, or veterinary advice. The pet-care subset is relatively sparse, so some rules rely on a small number of transactions; high confidence alone does not guarantee usefulness.
 
-The preprocessing, Apriori, association-rule, and recommendation backends are implemented. The **Streamlit dashboard** is implemented. The association graph, side-by-side threshold comparison, and final evaluation/report are still in development. See [`docs/tickets.md`](docs/tickets.md) for progress.
+The preprocessing, Apriori, association-rule, and recommendation backends are implemented. The **Streamlit dashboard** is implemented. The association graph and side-by-side threshold comparison are implemented in T08; the final evaluation and technical report remain pending. See [`docs/tickets.md`](docs/tickets.md) for progress and [`docs/t08_analytics.md`](docs/t08_analytics.md) for analysis instructions.
