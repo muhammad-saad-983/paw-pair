@@ -2,7 +2,7 @@
 
 PawPair is an explainable, association rule–based recommendation system for pet-care products. It uses the **Apriori algorithm** to discover products frequently purchased together and recommends additional items based on a customer's basket.
 
-The project currently includes a reproducible data-mining pipeline and a command-line recommendation engine. An interactive Streamlit interface is planned.
+The project includes a reproducible data-mining pipeline, command-line recommendation engine, and an interactive Streamlit dashboard.
 
 ## Features
 
@@ -11,6 +11,7 @@ The project currently includes a reproducible data-mining pipeline and a command
 - **Association rules:** Calculate support, confidence, and lift for directional item relationships.
 - **Explainable recommendations:** Recommend products not already in the basket and display the supporting rules.
 - **Smart basket and what-if analysis:** Add or remove items and compare recommendations before and after changes.
+- **Interactive dashboard:** Explore transactions, frequent itemsets, searchable rules, dynamic thresholds, and live recommendations.
 - **Automated tests:** Verify preprocessing, mining, rule generation, and recommendation behavior.
 
 ## Dataset
@@ -32,14 +33,18 @@ The optional `order_products__prior.csv` can also be used with the `--include-pr
 
 ## Getting Started
 
-**Requirements:** Python 3.10 or later. The current backend uses only the Python standard library.
+**Requirements:** Python 3.10 or later. The mining backend uses the standard library; the dashboard requires Streamlit and pandas.
 
 ```bash
 git clone https://github.com/muhammad-saad-983/paw-pair.git
 cd paw-pair
 ```
 
-After placing the dataset files in `data/raw/`, generate the frequent itemsets and association rules:
+Install dashboard dependencies and place the dataset files in `data/raw/`, then generate frequent itemsets and association rules:
+
+```bash
+python -m pip install -r requirements.txt
+```
 
 ```bash
 python run_pipeline.py
@@ -52,6 +57,14 @@ You can adjust the mining thresholds:
 ```bash
 python run_pipeline.py --min-support 0.003 --min-confidence 0.5
 ```
+
+### Run the Streamlit dashboard
+
+```bash
+streamlit run app.py
+```
+
+Use the sidebar to adjust minimum support/confidence and navigate **Overview**, **Frequent Itemsets**, **Rules Explorer**, and **Recommendations**. Changing the controls recalculates results in memory without overwriting `data/processed/`.
 
 ### Generate Recommendations
 
@@ -98,8 +111,10 @@ paw-pair/
 │   ├── profile.py         # Data preprocessing and profiling
 │   ├── apriori.py         # Frequent itemset mining
 │   ├── rules.py           # Association rule generation
-│   └── recommender.py     # Recommendations and basket operations
+│   ├── recommender.py     # Recommendations and basket operations
+│   └── ui_service.py      # Read-only dashboard data and rule filtering
 ├── tests/                 # Automated unit tests
+├── app.py                 # Streamlit dashboard
 ├── run_pipeline.py        # Data-mining entry point
 ├── recommend.py           # Recommendation CLI
 └── requirements.txt
@@ -109,4 +124,4 @@ paw-pair/
 
 Recommendations reflect **observed co-purchases**, not product compatibility, causal relationships, or veterinary advice. The pet-care subset is relatively sparse, so some rules rely on a small number of transactions; high confidence alone does not guarantee usefulness.
 
-The preprocessing, Apriori, association-rule, and recommendation backends are implemented. The **Streamlit interface, visual analytics, and final evaluation/report** are still in development. See [`docs/tickets.md`](docs/tickets.md) for progress.
+The preprocessing, Apriori, association-rule, and recommendation backends are implemented. The **Streamlit dashboard** is implemented. The association graph, side-by-side threshold comparison, and final evaluation/report are still in development. See [`docs/tickets.md`](docs/tickets.md) for progress.
