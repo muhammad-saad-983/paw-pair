@@ -1,2 +1,2 @@
-# T02 requires only the Python 3.10+ standard library.
-# Add Streamlit, pandas, mlxtend and plotting dependencies when their tickets begin.
+streamlit>=1.40,<2
+pandas>=2.0,<3
