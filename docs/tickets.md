@@ -10,7 +10,7 @@
 | T06 | Smart basket, rule ranking, why/explanations, item exclusions, what-if | Complete |
 | T07 | Streamlit dataset, itemsets, rules, recommendations, search/filter pages | Complete (30 tests and user browser checks passed) |
 | T08 | Association graph, side-by-side threshold comparison, enhanced visual analytics | Implemented (automated tests passed; browser verification pending) |
-| T09 | 5+ recommendation examples, 10+ manually classified rules, experiments, limitations | Not started |
+| T09 | 5+ recommendation examples, 10+ manually classified rules, experiments, limitations | Implemented (automated tests passed; group review pending) |
 | T10 | PDF/DOCX technical report, hand worked example, final submission verification | Not started |
 
 ## T06 acceptance criteria (implemented)
@@ -56,4 +56,13 @@ The `recommend.py` program provides a CLI demonstration. T07 also provides an in
 
 Detailed instructions and expected results: `docs/t08_analytics.md`.
 
-T09/T10 cover final experiments, manual rule inspection, and the technical report.
+## T09 acceptance criteria (implemented; group review pending)
+
+- Seven real recommendation examples, including both cat and dog products, are reproducible at support 0.002/confidence 0.30.
+- Thirteen manually annotated rules are verified against actual mined rule IDs and metrics. The labels are provisional judgments for the team to confirm, not automated classifications.
+- Seven support/confidence scenarios compare itemsets, rules, one-to-one rules, and descriptive in-sample basket coverage.
+- `python evaluate.py` writes `docs/t09_evaluation.md` and generated evidence under `data/processed/evaluation/`, without changing existing mining CSVs.
+- The report discusses sparsity, grocery-origin sample bias, co-purchase versus suitability, no held-out evaluation, and item coverage.
+- Ten new evaluation tests verify threshold behavior, classification validation, evidence, exports, and limitations.
+
+T10 covers the final technical report, hand-worked Apriori example, and submission audit.

@@ -90,6 +90,16 @@ python recommend.py --basket 24508 5938 --remove 5938
 python -m unittest discover -s tests -v
 ```
 
+## Evaluation
+
+Generate the T09 evaluation report and supporting CSV/JSON artifacts after running the pipeline:
+
+```bash
+python evaluate.py
+```
+
+The evaluation documents seven recommendation examples, 13 provisionally classified rules, and seven support/confidence experiments. The report is saved in [`docs/t09_evaluation.md`](docs/t09_evaluation.md); reviewer annotations are in [`docs/t09_rule_review.csv`](docs/t09_rule_review.csv). Machine-generated evidence is stored in `data/processed/evaluation/` and excluded from Git. The reported coverage is descriptive and in-sample, not predictive accuracy.
+
 ## Results
 
 Using `order_products__train.csv` with **minimum support = 0.002** and **minimum confidence = 0.30**:
@@ -117,9 +127,11 @@ paw-pair/
 │   ├── recommender.py     # Recommendations and basket operations
 │   ├── ui_service.py      # Read-only dashboard data and rule filtering
 │   ├── analytics.py       # Association graph filters and A/B comparisons
-│   └── network_plot.py    # Directed association network visualization
+│   ├── network_plot.py    # Directed association network visualization
+│   └── evaluation.py      # T09 experiments and validated review annotations
 ├── tests/                 # Automated unit tests
 ├── app.py                 # Streamlit dashboard
+├── evaluate.py            # Reproducible rule and threshold evaluation
 ├── run_pipeline.py        # Data-mining entry point
 ├── recommend.py           # Recommendation CLI
 └── requirements.txt
@@ -129,4 +141,4 @@ paw-pair/
 
 Recommendations reflect **observed co-purchases**, not product compatibility, causal relationships, or veterinary advice. The pet-care subset is relatively sparse, so some rules rely on a small number of transactions; high confidence alone does not guarantee usefulness.
 
-The preprocessing, Apriori, association-rule, and recommendation backends are implemented. The **Streamlit dashboard** is implemented. The association graph and side-by-side threshold comparison are implemented in T08; the final evaluation and technical report remain pending. See [`docs/tickets.md`](docs/tickets.md) for progress and [`docs/t08_analytics.md`](docs/t08_analytics.md) for analysis instructions.
+The preprocessing, Apriori, association-rule, and recommendation backends are implemented. The **Streamlit dashboard** is implemented. T09 evaluation and experiments are implemented, with the human classifications awaiting final group review. The final technical report and submission audit remain T10. See [`docs/tickets.md`](docs/tickets.md) for progress.

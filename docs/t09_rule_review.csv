@@ -1,0 +1,14 @@
+antecedent_ids_json,consequent_ids_json,classification,rationale
+"[""15190""]","[""12902""]",Useful,Two wet dog-food stews are a plausible variety-bundle suggestion; suitability still needs checking.
+"[""28331""]","[""2574""]",Useful,Dog chicken stew and beef stew can support a variety offer for wet-food shoppers.
+"[""25088""]","[""19571""]",Useful,Two Organix grain-free dog recipes may support same-range discovery for shoppers.
+"[""28134""]","[""7076""]",Useful,Grain-free turkey and chicken cat formulas may help shoppers discover other varieties.
+"[""46776""]","[""31676""]",Obvious / Trivial,Turkey and chicken variants from the same gravy cat-food range are an unsurprising pairing.
+"[""31747""]","[""24508""]",Obvious / Trivial,Both are classic seafood-flavored cat foods; the pairing adds little novel insight.
+"[""17766""]","[""7076""]",Obvious / Trivial,Grain-free turkey and chicken cat food formulas represent expected variety purchasing.
+"[""24508""]","[""14492""]",Obvious / Trivial,Seafood cat food recommending another seafood feast is expected rather than novel.
+"[""38054""]","[""10084""]",Unexpected,Turkey-and-giblets cat food linking to a beef recipe is less obvious from product names alone.
+"[""7477""]","[""18489""]",Unexpected,A mariners-catch pate paired with mixed-grill pate crosses seafood and meat flavor labels.
+"[""24508"", ""5938""]","[""14492""]",Weak / Uncertain,Perfect confidence is based on only seven joint orders and cannot establish general reliability.
+"[""10084"", ""31676""]","[""46776""]",Weak / Uncertain,Only six co-purchases support this multi-item rule despite its perfect confidence.
+"[""46157""]","[""17766""]",Weak / Uncertain,The rule appears strong but rests on six co-purchases and may not generalize.
