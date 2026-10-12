@@ -1,6 +1,24 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# Local configuration and editor files
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.vscode/
+.idea/
+.DS_Store
+
+# Data: retain directory placeholders only
 data/raw/*
 !data/raw/.gitkeep
 data/processed/*
